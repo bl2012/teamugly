@@ -37,6 +37,7 @@ public class MlionMovement : MonoBehaviour {
 		return new Vector3(xpos, ypos, zpos);
 	}
 
+	private ShootAnimal mlion_bullet;
 
 	void Start () {
 		//body2D = GetComponent<Rigidbody2D> ();
@@ -44,6 +45,7 @@ public class MlionMovement : MonoBehaviour {
 		mlion.position = SetPosition ((int)Positions.TOP);
         playerPos = player.GetComponent<Transform>();
 		//inputState = GetComponent<InputState>();
+		mlion_bullet = GetComponent<ShootAnimal>();//<<<<<<<<<<<<<<<<<<<<=====================for shooting
 	}
 
     void Update()
@@ -81,6 +83,11 @@ public class MlionMovement : MonoBehaviour {
 				}
 			}
         }
+
+		if(mlion_bullet != null && mlion_bullet.CanAttack){//<<<<<<<<<<<<<<<=======================Shoot lion
+			mlion_bullet.Attack(false, "mlion");
+			Debug.Log ("SHIIZA");
+		}
 
             timeElapsed += Time.deltaTime;
             //playerPos = newPlayerPos;
