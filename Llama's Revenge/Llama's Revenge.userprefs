@@ -1,0 +1,16 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\CharacterMovement.cs">
+    <Files>
+      <File FileName="Assets\Scripts\AnimalBullet.cs" Line="11" Column="28" />
+      <File FileName="Assets\Scripts\DealDamage.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ShootAnimal.cs" Line="36" Column="5" />
+      <File FileName="Assets\Scripts\MlionMovement.cs" Line="88" Column="40" />
+      <File FileName="Assets\Scripts\CharacterMovement.cs" Line="106" Column="47" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

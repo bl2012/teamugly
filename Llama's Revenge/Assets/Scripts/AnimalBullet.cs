@@ -8,7 +8,7 @@ public class AnimalBullet : MonoBehaviour {
 
 	void Start () {
 
-		//Destroy(gameObject, 10);
+		//Destroy(gameObject, 6);
 	}
 
 	void Update () {
