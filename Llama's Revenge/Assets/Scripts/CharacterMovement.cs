@@ -103,7 +103,7 @@ public class CharacterMovement : MonoBehaviour {
             ShootAnimal bullet = GetComponent<ShootAnimal>();
             if (bullet != null)
             {
-                bullet.Attack(false);
+                bullet.Attack(false, "llama");
             }
         }
 
