@@ -12,6 +12,9 @@ GameObject:
   - 23: {fileID: 2334916}
   - 114: {fileID: 11485010}
   - 61: {fileID: 6182950}
+  - 114: {fileID: 11493142}
+  - 114: {fileID: 11482948}
+  - 114: {fileID: 11473028}
   m_Layer: 0
   m_Name: mlion_commander
   m_TagString: Untagged
@@ -26,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.38541675, y: -.25, z: 0}
+  m_LocalPosition: {x: -2.3854167, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,8 +52,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -69,12 +74,39 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138136}
   m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
+--- !u!114 &11473028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138136}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 447716e42ff5748029a2e142b6d6d4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoulderPrefab: {fileID: 483714, guid: 0af2dd5f69be35743b88d9792afeb394, type: 2}
+  ROF: 2
+--- !u!114 &11482948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec4b803788a3914f8494aa04e485f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalPrefab: {fileID: 0}
+  ROF: 2
 --- !u!114 &11485010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,6 +119,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!114 &11493142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deea6da8eaba6464893b6d3ae41d0e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  enemy: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2313030}
   - 114: {fileID: 11404694}
   - 114: {fileID: 11408706}
+  - 114: {fileID: 11492018}
   m_Layer: 0
   m_Name: llama_commander
   m_TagString: Untagged
@@ -50,8 +51,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -86,7 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce14b92264e0e6e49995fe05b5e616c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: 0000000001000000020000000300000004000000
+  input: 000000000100000002000000
+  spawners:
+  - {fileID: 0}
 --- !u!114 &11408706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,13 +103,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8aa92934a606c41a081425950a66c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11492018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175264}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c626872dd0387743a6be13d8bbbb17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimalPrefab: {fileID: 483558, guid: acbaef04e12128f4893835f71e6cf2b2, type: 2}
+  ROF: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 175264}

@@ -12,6 +12,7 @@ public class DealDamage : MonoBehaviour {
 
 		if(health <= 0){
 			Destroy (gameObject);
+            Debug.Log("object destroyed");
 		}
 	}
 
@@ -21,16 +22,25 @@ public class DealDamage : MonoBehaviour {
         AnimalBullet bulletScript = bullet.GetComponent<AnimalBullet>();
 
 		if(bulletScript != null){
+            if (!bulletScript.launched)
+                return;
 			if(bulletScript.ifEnemyHit != enemy){
-				dealDamage(bulletScript.damage);
-                dealDamage(health);	
+				bulletScript.damage -= 1;
+                dealDamage(health);
+                Debug.Log("damage dealt");
 			}
-        
-            if (bulletScript.damage <= 0)
-                Destroy(bullet);
 
-            if (health <= 0)
-                Destroy(gameObject);
+           if (bulletScript.damage <= 0)
+            {
+                Destroy(bullet);
+                Debug.Log("target destroyed");
+            }
 		}
+        else if(otherCollider.CompareTag("commander") && gameObject.CompareTag("mlion"))
+        {
+            Debug.Log("You sank my battleship!");
+            Destroy(bullet);
+        }
+
 	}
 }
