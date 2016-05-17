@@ -2,11 +2,14 @@
 using System.Collections;
 
 public enum Buttons{
-	up,
-	down,
-	left,
-	right,
-    x
+	UP =    KeyCode.UpArrow,
+	DOWN =  KeyCode.DownArrow,
+	LEFT =  KeyCode.J,          
+	RIGHT = KeyCode.K,          
+    FIRE =  KeyCode.L,          
+    PAUSE = KeyCode.Keypad1,   
+    EXIT =  KeyCode.Keypad3, 
+    MENU =  KeyCode.U
 }
 
 public enum Condition
@@ -41,14 +44,20 @@ public class InputManager : MonoBehaviour {
 
 	public InputAxisState[] inputs;
 	public InputState inputState;
+    private static InputManager firstInstance = null;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Awake()
+    {
+        if (firstInstance == null)
+            firstInstance = this;
+        else if (firstInstance != this)
+            Destroy(gameObject);
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Update is called once per frame
+    void Update () {
 		foreach (var input in inputs) {
 			inputState.SetButtonValue (input.button, input.value);
 		}

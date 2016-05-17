@@ -10,6 +10,12 @@ public class InputState : MonoBehaviour {
 
 	private Dictionary<Buttons, ButtonState> buttonStates = new Dictionary<Buttons, ButtonState> ();
 
+    void Awake()
+    {
+        var inManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        if(inManager.inputState == null) inManager.inputState = this;
+    }
+
 	public void SetButtonValue(Buttons key, bool value){
 		if (!buttonStates.ContainsKey (key))
 			buttonStates.Add (key, new ButtonState ());
@@ -31,4 +37,12 @@ public class InputState : MonoBehaviour {
 		else
 			return false;
 	}
+
+    public string GetButtonName(Buttons key)
+    {
+        if (buttonStates.ContainsKey(key))
+            return key.ToString();
+        else
+            return null;
+    }
 }

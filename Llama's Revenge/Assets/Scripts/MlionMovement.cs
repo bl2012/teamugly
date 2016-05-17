@@ -3,25 +3,24 @@ using System.Collections;
 using System;
 
 public class MlionMovement : MonoBehaviour {
-	/*----------------------------------------------------------------------------------------------------
-	 * 
-	 * Dont forget to set up mlion commander
-	 * 
-	 * ---------------------------------------------------------------------------------------------------
-	 */
 
 	private Rigidbody2D body2D;
     public GameObject player;
-    private Transform playerPos;
     private Transform mlion;
+	public GameObject[] spawners;
+    private GameObject activeSpawner = null;
 
-    private float delay       = 0.75f;
-	private float timeElapsed = 0f;
+    private float delay        		 = 0.75f;
+	public float soldierDelay 		 = 4f;
+	private float soldierTimeElapsed = 0f;
+	private float timeElapsed 		 = 0f;
+
+	private float dTime;
 
     //private bool released = true;
     private System.Random rand = new System.Random();
 
-	private int xpos = -830;
+	private int xpos = 830;
 	private int zpos = 0;
 
 	public enum Positions : int
@@ -37,60 +36,62 @@ public class MlionMovement : MonoBehaviour {
 		return new Vector3(xpos, ypos, zpos);
 	}
 
-	private ShootAnimal mlion_bullet;
 
 	void Start () {
-		//body2D = GetComponent<Rigidbody2D> ();
 		mlion = gameObject.GetComponent<Transform> ();
 		mlion.position = SetPosition ((int)Positions.TOP);
-        playerPos = player.GetComponent<Transform>();
-		//inputState = GetComponent<InputState>();
-		mlion_bullet = GetComponent<ShootAnimal>();//<<<<<<<<<<<<<<<<<<<<=====================for shooting
-	}
+        timeElapsed = delay;
+    }
 
     void Update()
     {
+        if (player == null) return;
+
         var newPlayerPos = player.GetComponent<Transform>();
 
         if (timeElapsed > delay)
         {
 
-            if (newPlayerPos.position.y < mlion.position.y /*&& timeElapsed > delay*/)
+            if (newPlayerPos.position.y < mlion.position.y)
             {
-                //Debug.Log("mlion is above lion");
                 moveDown(mlion);
                 timeElapsed = 0;
 
             }
-            else if (newPlayerPos.position.y > mlion.position.y /*&& timeElapsed > delay*/)
+            else if (newPlayerPos.position.y > mlion.position.y)
             {
-                //Debug.Log("mlion is below lion");
                 moveUp(mlion);
                 timeElapsed = 0;
             }
             else
             {
-                //Debug.Log("mlion in same lane as lion");
                 randomMovement(mlion);
             }
-
-			if (newPlayerPos.position.y == mlion.position.y)
-			{
-				ShootBoulder bullet = GetComponent<ShootBoulder>();
-				if (bullet != null)
-				{
-					bullet.Attack(false);
-				}
-			}
         }
 
-		if(mlion_bullet != null && mlion_bullet.CanAttack){//<<<<<<<<<<<<<<<=======================Shoot lion
-			mlion_bullet.Attack(false, "mlion");
-			Debug.Log ("SHIIZA");
-		}
+        var bulletlion = (activeSpawner != null && activeSpawner.GetComponent<ShootAnimal>().currentAnimal != null) ? 
+                          activeSpawner.GetComponent<ShootAnimal>().currentAnimal.GetComponent<AnimalBullet>() : null;
+        if (bulletlion != null && !bulletlion.launched)
+        {
+            randomLlama();
+        }
 
-            timeElapsed += Time.deltaTime;
-            //playerPos = newPlayerPos;
+        if (soldierTimeElapsed > soldierDelay)
+        {
+            ShootAnimal bullet = activeSpawner.GetComponent<ShootAnimal>();
+            if (activeSpawner != null && bullet != null)
+            {
+                StartCoroutine(bullet.Attack(true));
+            }
+
+            soldierTimeElapsed = 0;
+        }        
+
+        dTime = Time.deltaTime;
+		timeElapsed += dTime;
+		//boulderTimeElapsed += dTime;
+		soldierTimeElapsed += dTime;
+
     }
 
     private void moveDown(Transform obj)
@@ -133,6 +134,23 @@ public class MlionMovement : MonoBehaviour {
 
     }
 
+    private void randomLlama()
+    {
+        switch (rand.Next(50)) // randomize switching
+        {
+            case 0:
+                StartCoroutine(activeSpawner.GetComponent<SwitchSoldier>().SwitchLeft());
+                break;
+            case 1:
+                StartCoroutine(activeSpawner.GetComponent<SwitchSoldier>().SwitchRight());
+                break;
+            default:
+                // do nothing;
+                break;
+
+        }
+    }
+
     private void randomMovement(Transform obj)
     {
         switch (rand.Next(50)) // randomize AI movement
@@ -151,4 +169,19 @@ public class MlionMovement : MonoBehaviour {
 
         }
     }
+
+
+public void OnTriggerStay2D(Collider2D otherCollider)
+{
+	if (otherCollider.tag != "mlion_spawner" || otherCollider == null) return;
+	if(!otherCollider.GetComponent<ShootAnimal>().onSpawner) return;
+	if (otherCollider.GetComponent<ShootAnimal> ().defeated)
+		return;
+
+        //Debug.Log("mlion commander touching " + otherCollider.name);
+        activeSpawner = otherCollider.gameObject;
+
+        
+	
+}
 }

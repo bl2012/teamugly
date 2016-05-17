@@ -3,11 +3,12 @@ using System.Collections;
 
 public class CharacterMovement : MonoBehaviour
 {
+    private GameManager manager;
 
     public Buttons[] input;
     private InputState inputState;
     public GameObject[] spawners;
-    private GameObject mySpawner;
+    private GameObject activeSpawner;
 
     private float attackTimeElapsed = 0f;
     private float delay = 0.25f;
@@ -15,10 +16,15 @@ public class CharacterMovement : MonoBehaviour
 
     private bool released = true;
 
-    private int xpos = 830;
+    private int xpos = -815;
     private int zpos = 0;
 
     private Transform player;
+
+    //private bool menuVisible = false;
+    private GameObject ColorM;
+
+    public int numNeeded;
 
     public enum Positions : int
     {
@@ -35,9 +41,14 @@ public class CharacterMovement : MonoBehaviour
 
     void Start()
     {
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager.farthestReached = Application.loadedLevelName;
+
+        manager.setNumNeededToWin(numNeeded);
 
         player = gameObject.GetComponent<Transform>();
         player.position = setPosition((int)Positions.TOP);
+        activeSpawner = spawners[0];
         inputState = GetComponent<InputState>();
     }
 
@@ -47,17 +58,61 @@ public class CharacterMovement : MonoBehaviour
         var up = inputState.GetButtonValue(input[0]);
         var down = inputState.GetButtonValue(input[1]);
         var left = inputState.GetButtonValue(input[2]);
-        //var right = inputState.GetButtonValue (input [3]);
+        var right = inputState.GetButtonValue(input[3]);
         var fire = inputState.GetButtonValue(input[4]);
+        var pause = inputState.GetButtonValue(input[5]);
+        var exit = inputState.GetButtonValue(input[6]);
+        var menu = inputState.GetButtonValue(input[7]);
 
         if (timeElapsed > delay && !Input.anyKey)
             released = true;
 
+        if (pause && released)
+        {
+            Debug.Log("Pause pressed");
+            released = false;
+
+            manager.PauseGame();
+
+            timeElapsed = 0;
+
+        }
+
+        if (menu && released)
+        {
+            Debug.Log("Menu pressed");
+            released = false;
+
+            if (ColorM == null)
+                ColorM = GameObject.Instantiate(Resources.Load("ColorWheel")) as GameObject;
+            else
+                Destroy(ColorM);
+
+            timeElapsed = 0;
+
+        }
+
+        if (exit)
+        {
+            Debug.Log("Exit pressed");
+
+            manager.QuitGame();
+        }
+
+        if (manager.paused)
+        {
+            if (fire && released)
+                manager.loadScene("MainMenu");
+
+            timeElapsed += Time.deltaTime;
+
+            return;
+        }
+
         if (down && released)
         {
-
             released = false;
-            //Debug.Log("Down Key Pressed");
+            Debug.Log("Down Key Pressed");
 
             switch ((int)player.position.y)
             {
@@ -81,7 +136,7 @@ public class CharacterMovement : MonoBehaviour
         if (up && released)
         {
             released = false;
-            //Debug.Log("Up Key Pressed");
+            Debug.Log("Up Key Pressed");
 
 
             switch ((int)player.position.y)
@@ -101,55 +156,69 @@ public class CharacterMovement : MonoBehaviour
             }
 
             timeElapsed = 0;
-          
-        }
-
-        //if (newPlayerPos.position.y == mlion.position.y) // change to recognize launched llamas
-        //{
-
-        //}
-
-        if (fire && released)
-        {
 
         }
 
-
-        timeElapsed += Time.deltaTime;
-        attackTimeElapsed += Time.deltaTime;
-    }
-
-    public void OnTriggerStay2D(Collider2D otherCollider)
-    {
-        var left = inputState.GetButtonValue(input[2]);
-        var right = inputState.GetButtonValue (input [3]);
-        var fire  = inputState.GetButtonValue (input [4]);
-
-        if(fire && attackTimeElapsed > delay)
+        if (fire && attackTimeElapsed > delay)
         {
+            Debug.Log("Fire pressed");
 
-            if (!otherCollider.CompareTag("spawner")) return;
+            var bulletllama = activeSpawner.GetComponent<ShootAnimal>().currentAnimal.GetComponent<AnimalBullet>();
+            if (bulletllama.launched) return;
 
-            otherCollider.GetComponent<ShootAnimal>().Attack(false);
-
-            ShootBoulder bullet = GetComponent<ShootBoulder>();
-            if (bullet != null)
-            {
-                bullet.Attack(true);
-            }
-
+            StartCoroutine(activeSpawner.GetComponent<ShootAnimal>().Attack(false));
             attackTimeElapsed = 0;
 
+        }
+        else if (left && released)
+        {
+            Debug.Log("Left pressed");
+
+            if (activeSpawner.GetComponent<ShootAnimal>().currentAnimal == null) return;
+            var bulletllama = activeSpawner.GetComponent<ShootAnimal>().currentAnimal.GetComponent<AnimalBullet>();
+            if (bulletllama.launched) return;
+
+            if (activeSpawner.GetComponent<ShootAnimal>().onSpawner)
+            {
+                released = false;
+                StartCoroutine(activeSpawner.GetComponent<SwitchSoldier>().SwitchLeft());
+            }
+            timeElapsed = 0;
 
         }
-        else if(left && released)
+        else if (right && released)
         {
-            Debug.Log("left key pressed");
+            Debug.Log("Right pressed");
+
+            if (activeSpawner.GetComponent<ShootAnimal>().currentAnimal == null) return;
+            if (activeSpawner.GetComponent<ShootAnimal>().defeated) return;
+            var bulletllama = activeSpawner.GetComponent<ShootAnimal>().currentAnimal.GetComponent<AnimalBullet>();
+            if (bulletllama.launched) return;
+
+            var llama = activeSpawner.GetComponent<ShootAnimal>().currentAnimal.GetComponent<Transform>();
+
+            if (activeSpawner.GetComponent<ShootAnimal>().onSpawner && Mathf.Abs(llama.position.x - activeSpawner.GetComponent<Transform>().position.x) < llama.GetComponent<BoxCollider2D>().size.x)
+            {
+                released = false;
+                StartCoroutine(activeSpawner.GetComponent<SwitchSoldier>().SwitchRight());
+
+            }
+            timeElapsed = 0;
+
         }
-        else if(right && released)
-        {
-            Debug.Log("right key pressed");
-        }
+
+        var dtime = Time.deltaTime;
+        timeElapsed += dtime;
+        attackTimeElapsed += dtime;
+
+    }
+
+    public void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        if (!otherCollider.CompareTag("llama_spawner")) return;
+
+        //Debug.Log ("Commander touching " + otherCollider.name);
+        activeSpawner = otherCollider.gameObject;
 
     }
 }
