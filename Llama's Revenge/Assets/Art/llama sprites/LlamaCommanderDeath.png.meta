@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: 5d5f329216942c6459f527d60b613171
+timeCreated: 1460908306
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: LlamaCommanderDeath_0
+    21300002: LlamaCommanderDeath_1
+    21300004: LlamaCommanderDeath_2
+    21300006: LlamaCommanderDeath_3
+    21300008: LlamaCommanderDeath_4
+    21300010: LlamaCommanderDeath_5
+    21300012: LlamaCommanderDeath_6
+    21300014: LlamaCommanderDeath_7
+    21300016: LlamaCommanderDeath_8
+    21300018: LlamaCommanderDeath_9
+    21300020: LlamaCommanderDeath_10
+    21300022: LlamaCommanderDeath_11
+    21300024: LlamaCommanderDeath_12
+    21300026: LlamaCommanderDeath_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: LlamaCommanderDeath_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 2
+        width: 58
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_1
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_2
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 2
+        width: 74
+        height: 67
+      alignment: 9
+      pivot: {x: .489986807, y: .468788803}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_3
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 2
+        width: 91
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_4
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 2
+        width: 91
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_5
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 2
+        width: 91
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_6
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 2
+        width: 94
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_7
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 2
+        width: 107
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2
+        width: 115
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2
+        width: 115
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_10
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 2
+        width: 115
+        height: 74
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_11
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 2
+        width: 115
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_12
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 2
+        width: 115
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LlamaCommanderDeath_13
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 2
+        width: 58
+        height: 67
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
