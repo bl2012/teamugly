@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - boulder
+  - llama_spawner
+  - soldier
+  - mlion
+  - commander
+  - level_boss
+  - mlion_spawner
+  - spawner
+  - catapult
+  - spawn_hub
   layers:
   - Default
   - TransparentFX
